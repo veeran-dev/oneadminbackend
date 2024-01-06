@@ -1,0 +1,472 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Course {
+  _id: String!
+  instituteId: String!
+  category: String!
+  name: String!
+  images: [String!]!
+  description: String!
+  duration: String!
+  features: [Feature!]!
+}
+
+type Feature {
+  title: String!
+  detail: String!
+}
+
+type Institute {
+  _id: String!
+  name: String!
+  about: String!
+  streetAddress: String!
+  city: String!
+  pincode: String!
+  state: String!
+  country: String!
+  pocName: String!
+  pocMobile: String!
+}
+
+type User {
+  _id: String!
+  name: String!
+  email: String!
+  mobile: String!
+  instituteId: String!
+  role: String!
+}
+
+type Student {
+  _id: String!
+  instituteId: String!
+  firstName: String!
+  lastName: String!
+  fatherName: String!
+  motherName: String!
+  school: String!
+  dob: String!
+  contact1: String!
+  contact2: String
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String!
+  pincode: String!
+  country: String!
+  batchId: [String!]!
+  lastEdited: DateTime!
+  joinedOn: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Batch {
+  _id: String!
+  instituteId: String!
+  courseId: String!
+  branchId: String!
+  name: String!
+  staffIds: [String!]!
+  description: String!
+  type: String!
+  startTime: String!
+  endTime: String!
+  days: [String!]!
+}
+
+type BatchResponse {
+  _id: String!
+  instituteId: String!
+  courseId: String!
+  branchId: String!
+  name: String!
+  staffIds: [String!]!
+  description: String!
+  type: String!
+  startTime: String!
+  endTime: String!
+  days: [String!]!
+  students: [Student!]!
+  courseName: String!
+  branchName: String!
+  staffName: [String!]!
+}
+
+type BatchWiseAnalyticsResult {
+  studentId: String!
+  studentName: String!
+  isPaid: String!
+  paymentDate: String!
+}
+
+type Branch {
+  _id: String!
+  instituteId: String!
+  name: String!
+  mainBranch: Boolean!
+  pocName: String!
+  pocMobile: String!
+  streetAddress: String!
+  city: String!
+  pincode: String!
+  state: String!
+  country: String!
+}
+
+type Payment {
+  _id: String!
+  instituteId: String!
+  studentId: String!
+  batchId: String!
+  amount: Float!
+  currency: String!
+  paymentId: String!
+  paymentType: String!
+  paymentStatus: String!
+  paymentDate: DateTime!
+  paidToDate: DateTime!
+  stripeToken: String!
+}
+
+type PaymentWithNames {
+  _id: String!
+  instituteId: String!
+  studentId: String!
+  batchId: String!
+  amount: Float!
+  currency: String!
+  paymentId: String!
+  paymentType: String!
+  paymentStatus: String!
+  paymentDate: DateTime!
+  paidToDate: DateTime!
+  stripeToken: String!
+  studentName: String!
+  batchName: String!
+  formattedPaymentDate: String!
+  formattedPaidTo: String!
+}
+
+type VoidResponse {
+  success: Boolean!
+  message: String!
+}
+
+type Attendance {
+  _id: String!
+  instituteId: String!
+  branchId: String!
+  batchId: String!
+  studentId: String!
+  status: String!
+  dateTime: String!
+}
+
+type AttendanceWithName {
+  _id: String!
+  instituteId: String!
+  branchId: String!
+  batchId: String!
+  studentId: String!
+  status: String!
+  dateTime: String!
+  fullName: String!
+}
+
+type AttendanceWithBatchName {
+  _id: String!
+  instituteId: String!
+  branchId: String!
+  batchId: String!
+  studentId: String!
+  status: String!
+  dateTime: String!
+  batchName: String!
+}
+
+type Invitation {
+  _id: String!
+  email: String!
+  senderUserId: String!
+  instituteId: String!
+  referralCode: String!
+  createdAt: DateTime!
+}
+
+type CommonData {
+  steps: Float!
+}
+
+type BatchAnalytics {
+  batchId: String!
+  batchName: String!
+  presentCount: Float!
+  absentCount: Float!
+  startTime: String!
+  studentsCount: Float!
+}
+
+type Query {
+  getCourseByInstituteId(query: getInstituteID!): [Course!]!
+  getCourseById(query: getCourseID!): Course!
+  getInstitute(instituteId: String!): Institute!
+  getUser(id: String!): User!
+  getUsersWithFilters(data: UserFiltersInput!): [User!]!
+  getUserById(id: String!): User!
+  getUserByEmail: User!
+  getBatchByID(query: BatchId!): Batch!
+  getBatchesByInstituteAndBatchName(query: GetBatchByID!, pagination: PaginationInput!): [BatchResponse!]!
+  getBatchesByBranchAndBatchName(query: GetBatchByBranchID!): [Batch!]!
+  getBatchesByCourseId(query: GetBatchByCourseID!): [Batch!]!
+  getStaffsByCourseId(query: GetBatchByCourseID!): [Batch!]!
+  getBatchWiseAnalytics(batchId: String!, date: String!): [BatchWiseAnalyticsResult!]!
+  getBranchesByInstituteId(query: getBranchesByInstituteId!): [Branch!]!
+  getBranchesById(query: getBranchesById!): Branch!
+  getPayments(instituteId: String!, studentName: String!, pagination: PaymentPaginationInput!): [PaymentWithNames!]!
+  getPaymentsWithSid(studentId: String!, pagination: PaymentPaginationInput!): [PaymentWithNames!]!
+  getStudentsByBranchId(data: StudentsByBranch!): [Student!]!
+  getStudentsById(data: StudentsByID!): Student!
+  getStudentsByInstituteId(instituteId: String!, name: String!, pagination: StudentPaginationInput!): [Student!]!
+  getStudentsByBatch(data: StudentsByBatch!): [Student!]!
+  getBatchesByStudentID(studentId: String!): [Batch!]!
+  getAttendance(instituteId: String!, batchId: String!, date: String): [AttendanceWithName!]!
+  getAttendanceWithSid(studentId: String!, pagination: AttendancePaginationInput!): [AttendanceWithBatchName!]!
+  getInvitationById(query: getInstituteId!): [Invitation!]!
+  getStepsByInstituteId(instituteId: String!): CommonData!
+  getBatchAnalytics(instituteId: String!): [BatchAnalytics!]!
+}
+
+input getInstituteID {
+  instituteId: String!
+  name: String!
+}
+
+input getCourseID {
+  courseId: String!
+}
+
+input UserFiltersInput {
+  instituteId: String!
+  staffName: String
+  batchName: String
+}
+
+input BatchId {
+  batchId: String!
+}
+
+input GetBatchByID {
+  instituteId: String!
+  name: String!
+}
+
+input PaginationInput {
+  limit: Float!
+  offset: Float!
+}
+
+input GetBatchByBranchID {
+  branchId: String!
+  name: String!
+}
+
+input GetBatchByCourseID {
+  courseId: String!
+  name: String!
+}
+
+input getBranchesByInstituteId {
+  instituteId: String!
+}
+
+input getBranchesById {
+  branchId: String!
+}
+
+input PaymentPaginationInput {
+  limit: Float!
+  offset: Float!
+}
+
+input StudentsByBranch {
+  branchId: String!
+  name: String!
+  batchName: String!
+}
+
+input StudentsByID {
+  studentId: String!
+}
+
+input StudentPaginationInput {
+  limit: Float!
+  offset: Float!
+}
+
+input StudentsByBatch {
+  batchId: String!
+  name: String!
+  batchName: String!
+}
+
+input AttendancePaginationInput {
+  limit: Float!
+  offset: Float!
+}
+
+input getInstituteId {
+  instituteId: String!
+}
+
+type Mutation {
+  createCourse(input: CourseInput!, images: [Upload!]!): Course!
+  editCourse(courseId: String!, courseData: CourseInput!, images: [Upload!]!): Course!
+  createInstitute(instituteData: InstituteInput!): Institute!
+  editInstitute(instituteId: String!, instituteData: InstituteInput!): Institute!
+  createUser(createUser: CreateUserInputType!): User!
+  createStaff(createStaff: CreateStaffInputType!): User!
+  editUser(id: String!, userData: EditUserInputType!): User!
+  createBatch(batchData: BatchInput!): Batch!
+  editBatch(batchId: String!, batchData: BatchInput!): Batch!
+  createBranch(branchData: BranchInput!): Branch!
+  editBranch(branchId: String!, branchData: BranchInput!): Branch!
+  addPayment(paymentInput: PaymentInput!): Payment!
+  createStudent(studentData: StudentInput!): Student!
+  editStudent(studentId: String!, studentData: StudentInput!): Student!
+  addStudentToBatch(data: AddBatch!): VoidResponse!
+  removeStudentFromBatch(data: AddBatch!): VoidResponse!
+  markAttendance(attendanceData: AttendanceInput!): [Attendance!]!
+  editAttendance(attendanceId: String!, attendanceData: AttendanceInput!): Attendance!
+  toggleAttendance(attendanceId: String!): Attendance!
+  sendInvite(email: String!, senderUserId: String!, instituteId: String!): VoidResponse!
+}
+
+input CourseInput {
+  instituteId: String!
+  category: String!
+  images: [String!]!
+  name: String!
+  description: String!
+  duration: String!
+  features: [FeatureInput!]
+}
+
+input FeatureInput {
+  title: String!
+  detail: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input InstituteInput {
+  name: String!
+  about: String!
+  streetAddress: String!
+  city: String!
+  pincode: String!
+  state: String!
+  country: String!
+  pocName: String!
+  pocMobile: String!
+}
+
+input CreateUserInputType {
+  name: String!
+  email: String!
+  mobile: String!
+  instituteId: String!
+  role: String!
+}
+
+input CreateStaffInputType {
+  name: String!
+  email: String!
+  instituteId: String!
+  role: String!
+}
+
+input EditUserInputType {
+  name: String!
+  email: String!
+  mobile: String!
+  role: String!
+}
+
+input BatchInput {
+  instituteId: String!
+  courseId: String!
+  branchId: String!
+  name: String!
+  staffIds: [String!]!
+  description: String!
+  type: String!
+  startTime: String!
+  endTime: String!
+  days: [String!]!
+}
+
+input BranchInput {
+  instituteId: String!
+  name: String!
+  pocName: String!
+  pocMobile: String!
+  streetAddress: String!
+  city: String!
+  pincode: String!
+  state: String!
+  country: String!
+}
+
+input PaymentInput {
+  instituteId: String!
+  studentId: String!
+  batchId: String!
+  amount: Float!
+  paidToDate: DateTime!
+  paymentStatus: String!
+  paymentType: String!
+}
+
+input StudentInput {
+  instituteId: String!
+  firstName: String!
+  lastName: String!
+  fatherName: String!
+  motherName: String!
+  school: String!
+  dob: String!
+  contact1: String!
+  contact2: String
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String!
+  pincode: String!
+  country: String!
+}
+
+input AddBatch {
+  studentId: String!
+  batchId: String!
+}
+
+input AttendanceInput {
+  instituteId: String!
+  branchId: String!
+  batchId: String!
+  date: String!
+  students: [StudentAttendance!]!
+}
+
+input StudentAttendance {
+  _id: String!
+  present: Boolean!
+}
