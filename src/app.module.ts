@@ -38,7 +38,10 @@ import { CommonModule } from './common/common.module';
       useNewUrlParser: true,
       useUnifiedTopology: true,
       ssl: true,
-      authSource: 'admin', // Specify your authentication source if needed
+      authSource: 'admin',
+      // tls: true,
+      // tlsInsecure: true, // Try adding this option
+      // tlsAllowInvalidCertificates: true, // Try adding this option
     }),
     CourseModule,
     InstituteModule,
