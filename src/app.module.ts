@@ -39,9 +39,6 @@ import { CommonModule } from './common/common.module';
       useUnifiedTopology: true,
       ssl: true,
       authSource: 'admin',
-      // tls: true,
-      // tlsInsecure: true, // Try adding this option
-      // tlsAllowInvalidCertificates: true, // Try adding this option
     }),
     CourseModule,
     InstituteModule,
