@@ -31,11 +31,14 @@ import { CommonModule } from './common/common.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      // url: 'mongodb://admin:password@localhost:27017/?authMechanism=DEFAULT',
-      url:process.env.DB_URL,
+      url: process.env.DB_URL,
       entities: [join(__dirname, '**/**.entity{.ts,.js}')],
       synchronize: true,
       logging: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      ssl: true,
+      authSource: 'admin', // Specify your authentication source if needed
     }),
     CourseModule,
     InstituteModule,
