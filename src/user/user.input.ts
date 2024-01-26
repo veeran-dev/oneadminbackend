@@ -50,6 +50,10 @@ export class CreateStaffInputType {
   @IsNotEmpty({ message: 'Role cannot be empty' })
   @IsIn(['admin', 'staff'], { message: 'Invalid role' })
   role: string;
+
+  @Field()
+  @IsOptional()
+  mobile: string;
 }
 
 
