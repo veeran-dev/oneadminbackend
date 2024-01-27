@@ -31,7 +31,7 @@ export class InvitationsService {
             referalLink: `https://app.oneadmin.in/auth/login?referal=${referralCode}`
         }
     };
-  
+    console.log("mailOptions .... ",mailOptions)
 
     // Send the email with the invite link
     await this.emailService.sendEmail(mailOptions.to, mailOptions.subject, mailOptions.template, mailOptions.context)

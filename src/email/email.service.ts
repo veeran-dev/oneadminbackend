@@ -14,8 +14,8 @@ export class EmailService {
     port: 587,
     secure: false,
     auth: {
-      user: 'kochacreator@gmail.com',
-      pass: 'dkWyfrBEVzZHL4Mq',
+      user: process.env.SMTP_EMAIL,
+      pass: process.env.SMTP_PWD,
     },
   });
 
@@ -25,7 +25,7 @@ export class EmailService {
     const html = await this.renderTemplate(template, context);
 
     const info = await this.transporter.sendMail({
-        from:"veeran.ambalam@gmail.com",
+        from:process.env.SMTP_FROM,
         to,
         subject,
         html,
