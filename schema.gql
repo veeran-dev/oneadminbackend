@@ -391,6 +391,7 @@ input CreateStaffInputType {
   email: String!
   instituteId: String!
   role: String!
+  mobile: String!
 }
 
 input EditUserInputType {

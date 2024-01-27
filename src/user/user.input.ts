@@ -53,6 +53,7 @@ export class CreateStaffInputType {
 
   @Field()
   @IsOptional()
+  @IsMobilePhone('en-IN', {strictMode:true}, {message:"Mobile number is invalid"})
   mobile: string;
 }
 
