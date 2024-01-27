@@ -28,7 +28,7 @@ export class InvitationsService {
         subject: "You've been invited to join oneadmin",
         template: 'invite',
         context:{
-            referalLink: `https://app.oneadmin.in/auth/login?referal=${referralCode}`
+            referalLink: `${process.env.REFERER_URL}/login?referal=${referralCode}`
         }
     };
     console.log("mailOptions .... ",mailOptions)
