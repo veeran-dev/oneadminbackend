@@ -80,7 +80,7 @@ export class Student {
   lastEdited: Date;
 
 
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => new Date() })
   @Field()
   joinedOn: Date;
 }
