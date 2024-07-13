@@ -25,6 +25,7 @@ export class StudentService {
   async createStudent(studentData: StudentInput): Promise<Student> {
     const student = this.studentRepository.create(studentData);
     student['batchId'] = [];
+    student['joinedOn'] = new Date()
     return await this.studentRepository.save(student);
   }
 
